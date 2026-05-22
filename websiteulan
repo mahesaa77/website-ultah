@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Buka ya💖</title>
+
+  <!-- FONT -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      background:#080808;
+      overflow-x:hidden;
+      color:white;
+    }
+
+    /* LOADING SCREEN */
+
+    #loading{
+      position:fixed;
+      width:100%;
+      height:100vh;
+      background:black;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      flex-direction:column;
+      z-index:99999;
+    }
+
+    #loading h1{
+      font-size:55px;
+      color:#ff4f81;
+      animation:pulse 1.5s infinite;
+    }
+
+    #loading p{
+      margin-top:15px;
+      color:#ccc;
+    }
+
+    @keyframes pulse{
+      0%{transform:scale(1);}
+      50%{transform:scale(1.1);}
+      100%{transform:scale(1);}
+    }
+
+    /* PASSWORD */
+
+    #password-screen{
+      position:fixed;
+      width:100%;
+      height:100vh;
+      background:
+      linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),
+      url('cover.jpg');
+      background-size:cover;
+      background-position:center;
+      z-index:9999;
+      display:none;
+      justify-content:center;
+      align-items:center;
+      flex-direction:column;
+      text-align:center;
+      padding:20px;
+    }
+
+    #password-screen h1{
+      font-size:55px;
+      color:#ff4f81;
+      margin-bottom:15px;
+    }
+
+    #password-screen p{
+      color:#ddd;
+      margin-bottom:25px;
+    }
+
+    #password-screen input{
+      width:320px;
+      padding:15px;
+      border:none;
+      border-radius:15px;
+      outline:none;
+      margin-bottom:20px;
+      font-size:16px;
+    }
+
+    #password-screen button{
+      padding:13px 30px;
+      border:none;
+      border-radius:15px;
+      background:#ff4f81;
+      color:white;
+      cursor:pointer;
+      font-size:16px;
+    }
+
+    /* MUSIC BUTTON */
+
+    .music-btn{
+      position:fixed;
+      right:20px;
+      bottom:20px;
+      width:65px;
+      height:65px;
+      border-radius:50%;
+      background:#ff4f81;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      font-size:28px;
+      cursor:pointer;
+      z-index:999;
+      box-shadow:0 0 20px rgba(255,79,129,0.7);
+    }
+
+    /* HERO */
+
+    .hero{
+      height:100vh;
+      background:
+      linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
+      url('cover.jpg');
+      background-size:cover;
+      background-position:center;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+      padding:20px;
+    }
+
+    .hero-content{
+      z-index:2;
+      animation:fadeUp 2s ease;
+    }
+
+    .hero h1{
+      font-size:75px;
+      margin-bottom:20px;
+      text-shadow:0 0 20px rgba(255,255,255,0.6);
+    }
+
+    .typing{
+      font-size:24px;
+      color:#f5f5f5;
+      min-height:35px;
+    }
+
+    /* HEART */
+
+    .heart{
+      position:fixed;
+      top:-10px;
+      color:#ff4f81;
+      animation:fall linear forwards;
+      opacity:0.8;
+      z-index:1;
+    }
+
+    @keyframes fall{
+      to{
+        transform:translateY(110vh);
+      }
+    }
+
+    /* COUNTDOWN */
+
+    .countdown{
+      margin-top:30px;
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    .time-box{
+      background:rgba(255,255,255,0.1);
+      padding:20px;
+      border-radius:20px;
+      backdrop-filter:blur(10px);
+      min-width:100px;
+    }
+
+    .time-box h2{
+      font-size:35px;
+      color:#ff4f81;
+    }
+
+    /* SECTION */
+
+    .container{
+      max-width:1200px;
+      margin:auto;
+      padding:80px 20px;
+      position:relative;
+      z-index:2;
+    }
+
+    .title{
+      text-align:center;
+      margin-bottom:50px;
+    }
+
+    .title h2{
+      font-size:50px;
+      color:#ff4f81;
+      margin-bottom:10px;
+    }
+
+    /* GALLERY */
+
+    .gallery{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+      gap:30px;
+    }
+
+    .card{
+      background:#151515;
+      border-radius:25px;
+      overflow:hidden;
+      transition:0.5s;
+      box-shadow:0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    .card:hover{
+      transform:translateY(-10px) scale(1.02);
+    }
+
+    .post-header{
+      display:flex;
+      align-items:center;
+      padding:15px;
+    }
+
+    .profile{
+      width:50px;
+      height:50px;
+      border-radius:50%;
+      object-fit:cover;
+      margin-right:12px;
+      border:2px solid #ff4f81;
+    }
+
+    .username{
+      font-weight:600;
+    }
+
+    .post-img{
+      width:100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+    }
+
+    .icons{
+      padding:15px;
+      font-size:25px;
+    }
+
+    .caption{
+      padding:0 15px 25px;
+    }
+
+    .caption h3{
+      color:#ff4f81;
+      margin-bottom:10px;
+    }
+
+    .caption p{
+      line-height:1.8;
+      color:#ddd;
+    }
+
+    /* LETTER */
+
+    .letter{
+      margin-top:100px;
+      background:linear-gradient(135deg,#ff4f81,#ff8fab);
+      padding:60px 35px;
+      border-radius:30px;
+      text-align:center;
+      box-shadow:0 10px 40px rgba(255,79,129,0.4);
+    }
+
+    .letter h2{
+      font-size:50px;
+      margin-bottom:25px;
+    }
+
+    .letter p{
+      line-height:2;
+      font-size:18px;
+      max-width:850px;
+      margin:auto;
+    }
+
+    /* VIDEO */
+
+    .video-section{
+      margin-top:100px;
+      text-align:center;
+    }
+
+    .post-video{
+      width:100%;
+      aspect-ratio:1 / 1;
+      object-fit:cover;
+      display:block;
+    }   
+
+    .video-section h2{
+      margin-bottom:30px;
+      color:#ff4f81;
+      font-size:45px;
+    }
+
+    video{
+      width:100%;
+      border-radius:30px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    /* FOOTER */
+
+    footer{
+      text-align:center;
+      padding:50px 20px;
+      color:#999;
+    }
+
+    /* ANIMATION */
+
+    @keyframes fadeUp{
+      from{
+        opacity:0;
+        transform:translateY(50px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    /* MOBILE */
+
+    @media(max-width:768px){
+
+      .hero h1{
+        font-size:45px;
+      }
+
+      .typing{
+        font-size:18px;
+      }
+
+      .title h2,
+      .letter h2,
+      .video-section h2{
+        font-size:35px;
+      }
+
+      .post-img{
+        height:320px;
+      }
+
+      .countdown{
+        gap:10px;
+      }
+
+      .time-box{
+        min-width:80px;
+        padding:15px;
+      }
+
+      .time-box h2{
+        font-size:28px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+<!-- LOADING -->
+
+<div id="loading">
+
+  <h1>💖 Loading ya sayang...</h1>
+
+  <p>Setelah loading selesai bisa klik logo music dikanan bawah ya✨</p>
+
+</div>
+
+<!-- MUSIC -->
+
+<audio id="music" loop>
+  <source src="music.mp3" type="audio/mp3">
+</audio>
+
+<!-- MUSIC BUTTON -->
+
+<div class="music-btn" onclick="toggleMusic()">
+  🎵
+</div>
+
+<!-- HERO -->
+
+<section class="hero">
+
+  <div class="hero-content">
+
+    <h1>HAPPY BIRTHDAY <br>
+       💖 Wulan Diyah Cantika 💖</h1>
+
+    <div class="typing" id="typing"></div>
+
+  </div>
+
+</section>
+
+<!-- CONTENT -->
+
+<section class="container">
+
+  <div class="title">
+
+    <h2>📸 Memory Gallery</h2>
+
+    <p>
+      Moment singkat dari aku Mahesa
+    </p>
+
+  </div>
+
+  <div class="gallery">
+
+    <!-- CARD 1 -->
+
+    <div class="card">
+
+      <div class="post-header">
+
+        <img src="profile.jpg" class="profile">
+
+        <div>
+          <div class="username">our.story</div>
+          <small>2 years ago</small>
+        </div>
+
+      </div>
+
+          <video controls class="post-video" playsinline preload="metadata">
+             <source src="video1.mp4" type="video/mp4">
+          </video>
+
+      <div class="icons">
+        ❤️ 💬 ✨
+      </div>
+
+      <div class="caption">
+
+        <h3>First Picture</h3>
+
+        <p>
+          Ini adalah foto pertama yang kamu kasih ke aku, masih ingat ga sayang? <br>
+          dan pada saat itu juga aku baru tau apa rasa minuman favoritmu yaitu Red Velvet...
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- CARD 2 -->
+
+    <div class="card">
+
+      <div class="post-header">
+
+        <img src="profile.jpg" class="profile">
+
+        <div>
+          <div class="username">our.story</div>
+          <small>8 month ago</small>
+        </div>
+
+      </div>
+
+        <video controls class="post-video" playsinline preload="metadata">
+           <source src="video2.mp4" type="video/mp4">
+        </video>
+
+      <div class="icons">
+        ❤️ 💬 ✨
+      </div>
+
+      <div class="caption">
+
+        <h3>Alun-alun warkop batik</h3>
+
+        <p>
+          Selanjutnya disini ada foto kamu dimana kita pertama kali keluar dengan iphone baru aku hehe..<br>
+          disitu kita bahagia banget karna salah satu wishlist diantara kita berdua ada yang terwujud
+        </p>
+
+      </div>
+
+    </div>
+
+     <!-- CARD 3 -->
+
+    <div class="card">
+
+      <div class="post-header">
+
+        <img src="profile.jpg" class="profile">
+
+        <div>
+          <div class="username">our.story</div>
+          <small>7 month ago</small>
+        </div>
+
+      </div>
+
+      <img src="video3.jpg" class="post-img">
+
+      <div class="icons">
+        ❤️ 💬 ✨
+      </div>
+
+      <div class="caption">
+
+        <h3>Sedapur Strawberry</h3>
+
+        <p>
+          Haha ini juga healing pertama kita ke Sedapur Strawberry pake motor baru kamu dan hp baru aku
+        </p>
+
+      </div>
+
+    </div>
+
+     <!-- CARD 4 -->
+
+    <div class="card">
+
+      <div class="post-header">
+
+        <img src="profile.jpg" class="profile">
+
+        <div>
+          <div class="username">our.story</div>
+          <small>6 month ago</small>
+        </div>
+
+      </div>
+
+      <img src="video4.jpg" class="post-img">
+
+      <div class="icons">
+        ❤️ 💬 ✨
+      </div>
+
+      <div class="caption">
+
+        <h3>Seblak Pekalongan</h3>
+
+        <p>
+          Apa kamu masih ingat ini foto pas apa? yes right ini foto kita nyeblak di Pekalongan sepulang kamu beli iphone xixixi
+        </p>
+
+      </div>
+
+    </div>
+
+     <!-- CARD 5 -->
+
+    <div class="card">
+
+      <div class="post-header">
+
+        <img src="profile.jpg" class="profile">
+
+        <div>
+          <div class="username">our.story</div>
+          <small>6 month ago</small>
+        </div>
+
+      </div>
+
+      <img src="video5.jpg" class="post-img">
+
+      <div class="icons">
+        ❤️ 💬 ✨
+      </div>
+
+      <div class="caption">
+
+        <h3>Periksa</h3>
+
+        <p>
+          this pict..., jujur sedih banget kalo inget momen ini karena disini kamu abis kecelakaan dan selang beberapa hari kita berantem lalu putus..
+        </p>
+
+      </div>
+
+    </div>
+
+     <!-- CARD 6 -->
+
+    <div class="card">
+
+      <div class="post-header">
+
+        <img src="profile.jpg" class="profile">
+
+        <div>
+          <div class="username">our.story</div>
+          <small>4 month ago</small>
+        </div>
+
+      </div>
+
+      <img src="video6.jpg" class="post-img">
+
+      <div class="icons">
+        ❤️ 💬 ✨
+      </div>
+
+      <div class="caption">
+
+        <h3>Alun-alun Kajen</h3>
+
+        <p>
+          Etsss tapi gapapa setelah kita lihat foto sebelumnya, kita bisa melihat foto bahagia ini dimana aku abis jemput kamu lembur kerja sampe jam 9 dan posisi kita baru balikan yeyyy....✨✨✨
+        </p>
+
+      </div>
+
+    </div>
+
+         <!-- CARD 7 -->
+
+    <div class="card">
+
+      <div class="post-header">
+
+        <img src="profile.jpg" class="profile">
+
+        <div>
+          <div class="username">our.story</div>
+          <small>3 month ago</small>
+        </div>
+
+      </div>
+
+      <img src="video7.jpg" class="post-img">
+
+      <div class="icons">
+        ❤️ 💬 ✨
+      </div>
+
+      <div class="caption">
+
+        <h3>Kedai jus Kajen</h3>
+
+        <p>
+          Oke next disini ada foto kamu dimana kita mulai bisa main lagi setelah 3 bulan putus dan ini ada di kedai juss kajen..
+        </p>
+
+      </div>
+
+    </div>
+
+        <!-- CARD 8 -->
+
+    <div class="card">
+
+      <div class="post-header">
+
+        <img src="profile.jpg" class="profile">
+
+        <div>
+          <div class="username">our.story</div>
+          <small>3 month ago</small>
+        </div>
+
+      </div>
+
+      <img src="video8.jpg" class="post-img">
+
+      <div class="icons">
+        ❤️ 💬 ✨
+      </div>
+
+      <div class="caption">
+
+        <h3>Seblak KesesiRejo</h3>
+
+        <p>
+          Nah ini ni iconic ada muka aku hahahaha maaf ya ikut nyempil, disini kita lagi mam seblak pas bulan puasa sambil bikin trend di indomaret hahayy
+        </p>
+
+      </div>
+
+    </div>
+
+        <!-- CARD 9 -->
+
+    <div class="card">
+
+      <div class="post-header">
+
+        <img src="profile.jpg" class="profile">
+
+        <div>
+          <div class="username">our.story</div>
+          <small>3 month ago</small>
+        </div>
+
+      </div>
+
+        <video controls class="post-video" playsinline preload="metadata">
+          <source src="video9.mp4" type="video/mp4">
+        </video>
+
+      <div class="icons">
+        ❤️ 💬 ✨
+      </div>
+
+      <div class="caption">
+
+        <h3>Momen lebaran</h3>
+
+        <p>
+          Selanjutnya aku mau spill video kamu yang menurut aku paling cantik banget karna kamu disini meskipun tanpa make up cantiknya bukan mainnnnn T-T
+        </p>
+
+      </div>
+
+    </div>
+
+        <!-- CARD 10 -->
+
+    <div class="card">
+
+      <div class="post-header">
+
+        <img src="profile.jpg" class="profile">
+
+        <div>
+          <div class="username">our.story</div>
+          <small>3 month ago</small>
+        </div>
+
+      </div>
+
+      <img src="video10.jpg" class="post-img">
+
+      <div class="icons">
+        ❤️ 💬 ✨
+      </div>
+
+      <div class="caption">
+
+        <h3>Goalaga Purbalingga</h3>
+
+        <p>
+          Kemudian disini ada foto kamu yang aku fotoin pas di GOALAGA, dan ini first experience kita wisata paling jauh ya sampe Purbalingga
+        </p>
+
+      </div>
+
+    </div>
+
+        <!-- CARD 11 -->
+
+    <div class="card">
+
+      <div class="post-header">
+
+        <img src="profile.jpg" class="profile">
+
+        <div>
+          <div class="username">our.story</div>
+          <small>2 month ago</small>
+        </div>
+
+      </div>
+
+      <img src="video11.jpg" class="post-img">
+
+      <div class="icons">
+        ❤️ 💬 ✨
+      </div>
+
+      <div class="caption">
+
+        <h3>Cfd Kajen</h3>
+
+        <p>
+          Terus disini ada kamu pas lagi freak banget ngefakk" mana gayanya kaya om" ToT
+        </p>
+
+      </div>
+
+    </div>
+
+        <!-- CARD 12 -->
+
+    <div class="card">
+
+      <div class="post-header">
+
+        <img src="profile.jpg" class="profile">
+
+        <div>
+          <div class="username">our.story</div>
+          <small>1 month ago</small>
+        </div>
+
+      </div>
+
+      <img src="video12.jpg" class="post-img">
+
+      <div class="icons">
+        ❤️ 💬 ✨
+      </div>
+
+      <div class="caption">
+
+        <h3>Warkop</h3>
+
+        <p>
+          And this last pict, disini kita ribut karna kamu bikin bm dan malem itu bener" bad banget 2/10 asli aku males polll...
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- LETTER -->
+
+  <div class="letter">
+
+    <h2>💌 Special Letter</h2>
+
+    <p>
+      Selamat ulang tahun yang ke-20 sayangku cintaku cantiku <br>
+      Semoga panjang umur, sehat selalu, bahagia selalu, sukses selalu, apapun impian kamu semoga cepat terwujud ya.., aku disini akan selalu mensupport kamu selagi itu hal positif.<br>
+      Aku berterima kasih atas hadirnya kamu didalam hidup aku, karna adanya kamu aku bisa menjadi diriku sendiri aku bisa bermanja sama kamu layaknya anak kecil, terima kasih atas segala pelukan hangat yang telah kamu beri ya sayang.<br> 
+      Harapan aku semoga ke depannya kamu bisa tetap sayang aku, tetap menjadi perempuan yang selalu aku sayang selama ini dan jangan khianati aku sekecil apapun itu ya sayang, apapun halangannya semoga kita bisa lewatin semuanya bareng-bareng ya supaya kita bisa wujudin wishlist yang amat-amat susah itu xixi.<br>
+      Mungkin cukup sekian ucapan yang cukup ringkas ini karna aku gabisa ngerangkai kata-kata hehe, semoga dengan ini kamu bisa selalu mengingat aku karna projek ini, pokonya aku cuma mau ngucapin kalo dalam bahasa cina tu 生日快乐 (Shēngrì kuàilè)❤️
+    </p>
+
+  </div>
+
+  <!-- VIDEO -->
+
+  <div class="video-section">
+
+    <h2>🎥 Memory Video</h2>
+
+    <video controls>
+
+      <source src="videobawah.mp4" type="video/mp4">
+
+    </video>
+
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+  Made by Mahesa
+</footer>
+
+<!-- SCRIPT -->
+
+<script>
+
+  // LOADING SCREEN
+
+  setTimeout(() => {
+
+    document.getElementById("loading").style.display = "none";
+
+  }, 3000);
+
+  // MUSIC
+
+  const music = document.getElementById("music");
+
+  function toggleMusic(){
+
+    if(music.paused){
+
+      music.play();
+
+    } else {
+
+      music.pause();
+
+    }
+
+  }
+
+  // AUTO PLAY SETELAH KLIK
+
+  document.body.addEventListener("click", () => {
+    music.play();
+  }, { once: true });
+
+  // HEART RAIN
+
+  function createHeart(){
+
+    const heart = document.createElement("div");
+
+    heart.classList.add("heart");
+
+    heart.innerHTML = "💖";
+
+    heart.style.left = Math.random() * window.innerWidth + "px";
+
+    heart.style.fontSize = Math.random() * 20 + 15 + "px";
+
+    heart.style.animationDuration =
+    Math.random() * 3 + 3 + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+
+      heart.remove();
+
+    }, 6000);
+
+  }
+
+  setInterval(createHeart, 250);
+
+  // TYPING TEXT
+
+  const text =
+  "💖 12 June 2026 💖";
+
+  let index = 0;
+
+  function typing(){
+
+    if(index < text.length){
+
+      document.getElementById("typing").innerHTML +=
+      text.charAt(index);
+
+      index++;
+
+      setTimeout(typing, 70);
+
+    }
+
+  }
+
+  typing();
+
+</script>
+
+</body>
+</html>
